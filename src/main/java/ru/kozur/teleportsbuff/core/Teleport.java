@@ -6,6 +6,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.chat.hover.content.Text;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -74,7 +75,7 @@ public class Teleport {
         players.remove(sender);
     }
 
-    private static void clickableMessage(Player myPlayer, Player targetPlayer) {
+    private static void clickableMessage(@NotNull Player myPlayer, Player targetPlayer) {
         targetPlayer.sendMessage("Игрок " + ChatColor.AQUA + myPlayer.getName() + ChatColor.WHITE + " хочет телепортироваться к вам");
 
         TextComponent accept = new TextComponent(ChatColor.GREEN + "[Принять]");
