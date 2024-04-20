@@ -1,0 +1,10 @@
+name: TeleportsBuff
+version: '${project.version}'
+main: ru.kozur.teleportsbuff.TeleportsBuff
+api-version: '1.16'
+commands:
+  teleport:
+    aliases:
+      - tpa
+  tpaccept: {}
+  decline: {}
