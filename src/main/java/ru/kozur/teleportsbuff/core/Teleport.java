@@ -4,9 +4,11 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.chat.hover.content.Text;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import ru.kozur.teleportsbuff.TeleportsBuff;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,33 +24,37 @@ public class Teleport {
             return;
         }
 
+        if (sender.getName().equals(receiver.getName())) {
+            sender.sendMessage("Вы не можете отправить запрос себе!");
+            return;
+        }
+        sender.sendMessage("Вы отправили запрос на телепортацию");
         clickableMessage(sender, receiver);
         players.put(sender, receiver);
     }
 
     public static void acceptTeleport(Player receiver) {
 
-            if (!(players.containsValue(receiver))) {
-                receiver.sendMessage("У вас нет входящих запросов на телепортацию!");
-                return;
-            }
+        if (!(players.containsValue(receiver))) {
+            receiver.sendMessage("У вас нет входящих запросов на телепортацию!");
+            return;
+        }
 
-            Player sender = null;
-            for (Map.Entry<Player, Player> entry : players.entrySet()) {
-                if (entry.getValue().equals(receiver)) {
-                    sender = entry.getKey();
-                    break;
-                }
-            }
+        Player sender = players.entrySet().stream().filter(entry -> entry.getValue().equals(receiver)).findFirst().map(Map.Entry::getKey).orElse(null);
 
-            if (sender != null) {
-                sender.sendMessage("Игрок принял запрос на телепортацию!");
-                receiver.sendMessage("Телепортируем...");
-                receiver.teleport(sender.getLocation());
-            } else {
-                receiver.sendMessage("Игрок не найден в списке!");
-            }
+        if (sender == null) {
+            receiver.sendMessage("Игрок не найден в списке");
+            return;
+        }
+        sender.sendMessage("Игрок принял запрос на телепортацию!");
+        receiver.sendMessage("Телепортируем через 7 секунд...");
+
+        Bukkit.getScheduler().scheduleSyncDelayedTask(TeleportsBuff.getInstance(), () ->{
+            sender.teleport(receiver.getLocation());
             players.remove(receiver);
+            players.remove(sender);
+        },20 * 7);
+
     }
 
     public static void declineTeleport(Player receiver) {
@@ -57,21 +63,17 @@ public class Teleport {
             return;
         }
 
-        Player sender = null;
-        for (Map.Entry<Player, Player> entry : players.entrySet()) {
-            if (entry.getValue().equals(receiver)) {
-                sender = entry.getKey();
-                break;
-            }
+        Player sender = players.entrySet().stream().filter(entry -> entry.getValue().equals(receiver)).findFirst().map(Map.Entry::getKey).orElse(null);
+
+        if (sender == null) {
+            receiver.sendMessage("Игрок не найден в списке!");
+            return;
         }
 
-        if (sender != null) {
-            sender.sendMessage("Игрок отклонил запрос на телепортацию!");
-        } else {
-            receiver.sendMessage("Игрок не найден в списке!");
-        }
+        sender.sendMessage("Игрок отклонил запрос на телепортацию!");
 
         receiver.sendMessage("Вы отклонили запрос на телепортацию!");
+        players.remove(receiver);
         players.remove(sender);
     }
 

@@ -1,3 +1,7 @@
 
+v
+java:S1444".Make this "public static instance" field final(Êì«Æøÿÿÿÿ8Œ˜üï1J$c5a21dbf-1e5a-439f-a101-4c34d7b5950d
 Ã
-java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(â¶œ48²Ûîçî1J$4d49d463-fc7e-4c5a-8ea9-15323525dc3c
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(â¶œ48²Ûîçî1J$fbe4c185-c4c7-4bc7-b186-3460145421ad
+~
+java:S2696"6Make the enclosing method "static" or remove this set.(ñõîÙşÿÿÿÿ8Œ˜üï1J$c5e66566-9dd9-431f-a4b6-40bddd440a63
