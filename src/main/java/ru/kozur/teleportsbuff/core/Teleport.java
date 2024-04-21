@@ -15,12 +15,10 @@ import ru.kozur.teleportsbuff.TeleportsBuff;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class Teleport {
     public static Map<Player, Player> players = new HashMap<>();
-    private static long mainTime = 0;
 
     public static void sendTeleport(Player sender, Player receiver) {
 
