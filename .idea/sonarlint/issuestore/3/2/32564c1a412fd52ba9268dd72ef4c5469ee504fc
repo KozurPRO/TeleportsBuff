@@ -1,13 +1,9 @@
 
 u
-java:S1444"-Make this "public static players" field final(ŒÔ¬Çÿÿÿÿÿ8°»Îýï1J$52ec753b-4473-4cd3-93c0-fd256e9926a5
+java:S1444"-Make this "public static players" field final(ŒÔ¬Çÿÿÿÿÿ8°»Îýï1J$d9794490-b0f2-4e72-a48c-fbbd4843808b
 e
-java:S2386"Make this member "protected".(ŒÔ¬Çÿÿÿÿÿ8Â»Îýï1J$72687af5-8abc-4a2d-9701-49dbf5b28d6e
+java:S2386"Make this member "protected".(ŒÔ¬Çÿÿÿÿÿ8Â»Îýï1J$e5833741-6834-48b9-b9ea-448e3c866f02
 }
-java:S1118":Add a private constructor to hide the implicit public one.(Ü™ð–8Ä»Îýï1J$c811b35d-834f-464a-8326-ced5673f76d6
+java:S1118":Add a private constructor to hide the implicit public one.(Ü™ð–8Ä»Îýï1J$74f7325f-589b-4f14-9d3c-a1d29d702875
 v
-java:S1874q"3Remove this use of "sendMessage"; it is deprecated.(Ìø¨ú8Ñ»Îýï1J$da5a6e16-87e9-4968-8a36-9b430ae79267
-Ž
-java:S1128"FRemove this unused import 'java.util.concurrent.atomic.AtomicInteger'.(¿êäœøÿÿÿÿ8×ˆÝýï1J$fd9553b5-b21e-4ee5-86fa-aca4674107b4
-t
-java:S1068",Remove this unused "mainTime" private field.(¢ÕÉ˜ûÿÿÿÿ8Ó»Îýï1J$c402238f-168e-429f-8592-1a0560b52587
+java:S1874o"3Remove this use of "sendMessage"; it is deprecated.(Ìø¨ú8Ñ»Îýï1J$24334575-1ada-44bc-998b-ba4dd47324b4
