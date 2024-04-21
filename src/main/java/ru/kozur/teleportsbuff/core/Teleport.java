@@ -6,16 +6,21 @@ import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.chat.hover.content.Text;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import ru.kozur.teleportsbuff.TeleportsBuff;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class Teleport {
     public static Map<Player, Player> players = new HashMap<>();
+    private static long mainTime = 0;
 
     public static void sendTeleport(Player sender, Player receiver) {
 
@@ -28,6 +33,7 @@ public class Teleport {
             sender.sendMessage("Вы не можете отправить запрос себе!");
             return;
         }
+
         sender.sendMessage("Вы отправили запрос на телепортацию");
         clickableMessage(sender, receiver);
         players.put(sender, receiver);
@@ -49,11 +55,26 @@ public class Teleport {
         sender.sendMessage("Игрок принял запрос на телепортацию!");
         receiver.sendMessage("Телепортируем через 7 секунд...");
 
-        Bukkit.getScheduler().scheduleSyncDelayedTask(TeleportsBuff.getInstance(), () ->{
-            sender.teleport(receiver.getLocation());
-            players.remove(receiver);
-            players.remove(sender);
-        },20 * 7);
+        BossBar bossBar = Bukkit.createBossBar("Телепортация через:", BarColor.GREEN, BarStyle.SOLID);
+        bossBar.setProgress(1.0);
+        bossBar.addPlayer(sender);
+
+        long dateNow = System.currentTimeMillis();
+
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(TeleportsBuff.getInstance(), () -> {
+            long currentTime = System.currentTimeMillis();
+            if (currentTime - dateNow <= 7000) {
+                bossBar.setTitle("Телепортация через: " + (7 - (currentTime - dateNow) / 1000) + " сек.");
+            } else {
+                sender.sendMessage("Телепортация...");
+                sender.teleport(receiver.getLocation());
+                bossBar.setVisible(false);
+                bossBar.removeAll();
+                Bukkit.getScheduler().cancelTasks(TeleportsBuff.getInstance());
+            }
+
+        }, 0L, 0L);
+
 
     }
 

@@ -18,6 +18,11 @@ public class TeleportRequestCommand implements CommandExecutor {
 
         Player targetPlayer = getServer().getPlayer(args[0]);
 
+        if (targetPlayer == null) {
+            player.sendMessage("Игрока нету на сервере!");
+            return false;
+        }
+
         Teleport.sendTeleport(player,targetPlayer);
         return true;
     }
